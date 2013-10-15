@@ -4,7 +4,8 @@
  <script src="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.0.0-beta/nv.d3.min.js"></script>
  <script>
  $(document).ready(function(){
-    $.ajax('/services/data/v28.0/analytics/reports/{!$CurrentPage.parameters.reportId}',
+    // Make sure you're using a MATRIX Report
+    $.ajax('/services/data/v29.0/analytics/reports/{!$CurrentPage.parameters.reportId}',
         {
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer {!$Api.Session_ID}');
