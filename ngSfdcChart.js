@@ -35,7 +35,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                             labelsx[di] = de.label;
                             valuesy.push(ai);
                             labelsy[ai] = ae.label;
-                            size.push((scope.data.factMap[de.key+"_"+ae.key+"!T"].aggregates[0].value));
+                            size.push((scope.data.factMap[ae.key+"!T"].aggregates[0].value));
                         });
                     });
                     var r = Raphael("chart");
