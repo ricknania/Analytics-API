@@ -41,6 +41,9 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                     var labelxu=labelsx.filter(function(itm,i,a){
                         return i==a.indexOf(itm);
                     });
+                     var labelyu=labelsy.filter(function(itm,i,a){
+                        return i==a.indexOf(itm);
+                    });
                     var r = Raphael(elem.children()[0]);
                     r.dotchart(10, 10, 400, 400, valuesx, valuesy, size, 
                         {
@@ -49,7 +52,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                             heat: true, 
                             axis: "0 0 1 1", 
                             axisxstep: labelxu.length - 1, 
-                            axisystep: valuesy.length - 1, 
+                            axisystep: labelyu.length - 1, 
                             axisxlabels: labelsx, 
                             axisxtype: " ", 
                             axisytype: " ", 
