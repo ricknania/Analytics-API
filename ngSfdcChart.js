@@ -4,17 +4,7 @@
 // <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
 // <script src="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.raphael-min.js"></script>
 // <script src="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.dot-min.js"></script>
-var script = document.createElement('script');
-script.type = 'text/javascript';
-script.src = 'https://www.google.com/jsapi';
-var helper = function() {
-    google.load("visualization", "1", {packages:["corechart"]});
-};
-script.onreadystatechange= function () {
-  if (this.readyState == 'complete') helper();
-}
-script.onload= helper;
-document.head.appendChild(script);
+google.load("visualization", "1", {packages:["corechart"]});
 var sfdcCharts = angular.module('sfdcCharts', []);
 sfdcCharts.directive('sfdcChart', function() {
     return {
