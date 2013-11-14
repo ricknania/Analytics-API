@@ -13,7 +13,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                 data: '=data',
                 type: '=type'
             },
-            template: '<div style="height: 400px; width: 400px;"></div>',
+            template: '<div style="height: 400px; width: 400px;"></div><svg></svg>',
             link: function(scope, elem, attrs) {
                 if(scope.type === 'pie') {
                   var chartPoints = [];
@@ -38,7 +38,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                             size.push((scope.data.factMap[ae.key+"!T"].aggregates[0].value));
                         });
                     });
-                    var r = Raphael("chart");
+                    var r = Raphael(elem.children()[1]);
                     r.dotchart(10, 10, 600, 480, valuesx, valuesy, size, 
                         {
                             symbol: "o", 
