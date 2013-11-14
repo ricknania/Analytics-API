@@ -39,7 +39,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                         });
                     });
                     var r = Raphael(elem.children()[0]);
-                    r.dotchart(10, 10, 600, 480, valuesx, valuesy, size, 
+                    r.dotchart(10, 10, 400, 400, valuesx, valuesy, size, 
                         {
                             symbol: "o", 
                             max: 20, 
