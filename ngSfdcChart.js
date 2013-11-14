@@ -5,7 +5,6 @@
 // <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
 // <script src="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.raphael-min.js"></script>
 // <script src="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.dot-min.js"></script>
-LazyLoad.js('https://www.google.com/jsapi', function() {
 var sfdcCharts = angular.module('sfdcCharts', []);
 google.load("visualization", "1", {packages:["corechart"]});
 sfdcCharts.directive('sfdcChart', function() {
@@ -64,5 +63,4 @@ sfdcCharts.directive('sfdcChart', function() {
             }
         }
     };
-});
 });
