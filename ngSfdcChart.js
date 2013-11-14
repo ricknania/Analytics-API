@@ -25,12 +25,12 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                   new google.visualization.PieChart(elem.children()[0]).draw(myData, {});
                 } else if(scope.type === 'dot') {
                     var valuesx = [];
-                    var labelsx = new Array(scope.data.groupingsDown.groupings.length);
+                    var labelsx = new Array();
                     var valuesy = [];
-                    var labelsy = new Array(scope.data.groupingsAcross.groupings.length);
+                    var labelsy = new Array();
                     var size = [];
                     $.each(scope.data.groupingsDown.groupings, function(di, de) {
-                        $.each(scope.data.groupingsAcross.groupings, function(ai, ae) {
+                        $.each(de.groupings, function(ai, ae) {
                             valuesx.push(di);
                             labelsx[di] = de.label;
                             valuesy.push(ai);
