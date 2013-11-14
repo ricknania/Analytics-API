@@ -14,7 +14,7 @@ script.onreadystatechange= function () {
   if (this.readyState == 'complete') helper();
 }
 script.onload= helper;
-document.body.appendChild(script);
+document.head.appendChild(script);
 var sfdcCharts = angular.module('sfdcCharts', []);
 sfdcCharts.directive('sfdcChart', function() {
     return {
