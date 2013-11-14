@@ -29,8 +29,8 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                     var valuesy = [];
                     var labelsy = new Array();
                     var size = [];
-                    $.each(scope.data.groupingsDown.groupings, function(di, de) {
-                        $.each(de.groupings, function(ai, ae) {
+                    angular.forEach(scope.data.groupingsDown.groupings, function(de, di) {
+                        angular.forEach(de.groupings, function(ae, ai) {
                             valuesx.push(di);
                             labelsx[di] = de.label;
                             valuesy.push(ai);
