@@ -7,7 +7,7 @@
 var script = document.createElement('script');
 script.type = 'text/javascript';
 script.src = 'https://www.google.com/jsapi';
-document.body.appendChild(script);
+var helper = function() {
     google.load("visualization", "1", {packages:["corechart"]});
     var sfdcCharts = angular.module('sfdcCharts', []);
     sfdcCharts.directive('sfdcChart', function() {
@@ -67,3 +67,9 @@ document.body.appendChild(script);
             }
         };
     });
+};
+script.onreadystatechange= function () {
+  if (this.readyState == 'complete') helper();
+}
+script.onload= helper;
+document.body.appendChild(script);
