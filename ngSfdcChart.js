@@ -9,7 +9,13 @@ script.type = 'text/javascript';
 script.src = 'https://www.google.com/jsapi';
 var helper = function() {
     google.load("visualization", "1", {packages:["corechart"]});
-    var sfdcCharts = angular.module('sfdcCharts', []);
+};
+script.onreadystatechange= function () {
+  if (this.readyState == 'complete') helper();
+}
+script.onload= helper;
+document.body.appendChild(script);
+var sfdcCharts = angular.module('sfdcCharts', []);
     sfdcCharts.directive('sfdcChart', function() {
         return {
             restrict: 'E',
@@ -67,9 +73,3 @@ var helper = function() {
             }
         };
     });
-};
-script.onreadystatechange= function () {
-  if (this.readyState == 'complete') helper();
-}
-script.onload= helper;
-document.body.appendChild(script);
