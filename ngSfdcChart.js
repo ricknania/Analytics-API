@@ -5,7 +5,6 @@
 // <script src="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.raphael-min.js"></script>
 // <script src="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.dot-min.js"></script>
 var sfdcCharts = angular.module('sfdcCharts', []);
-google.load("visualization", "1", {packages:["corechart"]});
 sfdcCharts.directive('sfdcChart', function() {
     return {
         restrict: 'E',
