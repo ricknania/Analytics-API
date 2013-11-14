@@ -1,10 +1,11 @@
 // Depends
+// https://raw.github.com/rgrove/lazyload/master/lazyload.js
 //  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js">
 // <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 // <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
 // <script src="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.raphael-min.js"></script>
 // <script src="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.dot-min.js"></script>
-
+LazyLoad.js('https://www.google.com/jsapi');
 var sfdcCharts = angular.module('sfdcCharts', []);
 google.load("visualization", "1", {packages:["corechart"]});
 sfdcCharts.directive('sfdcChart', function() {
