@@ -38,6 +38,9 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                             size.push((scope.data.factMap[ae.key+"!T"].aggregates[0].value));
                         });
                     });
+                    var labelxu=labelx.filter(function(itm,i,a){
+                        return i==a.indexOf(itm);
+                    });
                     var r = Raphael(elem.children()[0]);
                     r.dotchart(10, 10, 400, 400, valuesx, valuesy, size, 
                         {
@@ -45,7 +48,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                             max: 20, 
                             heat: true, 
                             axis: "0 0 1 1", 
-                            axisxstep: valuesx.length - 1, 
+                            axisxstep: labelxu.length - 1, 
                             axisystep: valuesy.length - 1, 
                             axisxlabels: labelsx, 
                             axisxtype: " ", 
@@ -64,3 +67,4 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
         };
     });
 });
+
