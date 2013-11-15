@@ -16,7 +16,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                 data: '=data',
                 type: '=type'
             },
-            template: '<div style="height: 400px; width: 400px;"></div>',
+            template: '<div style="height: 400px; width: 400px;"><svg></svg></div>',
             link: function(scope, elem, attrs) {
                 if(scope.type === 'pie') {
                   var chartPoints = [];
@@ -72,7 +72,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                             values.push({"x": ae.label, "y": scope.data.factMap[ae.key+"!T"].aggregates[0].value});
                         });
                     });
-                    d3.select(elem.children()[0]).datum(chartData).transition().duration(500).call(chart);
+                    d3.select(elem.children()[0].children()[0]).datum(chartData).transition().duration(500).call(chart);
                 }
             }
         };
