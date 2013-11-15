@@ -72,7 +72,7 @@ angular.module('sfdcCharts', []).config(function($provide, $compileProvider, $fi
                             values.push({"x": ae.label, "y": scope.data.factMap[ae.key+"!T"].aggregates[0].value});
                         });
                     });
-                    d3.select(elem.children()[0].children()[0]).datum(chartData).transition().duration(500).call(chart);
+                    d3.select(elem.children()[0].children[0]).datum(chartData).transition().duration(500).call(chart);
                 }
             }
         };
