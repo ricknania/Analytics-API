@@ -71,7 +71,7 @@
                         $scope.dashResponse = response;
                         $scope.redraw();
                         if ($scope.afterDataFetch) $scope.afterDataFetch();
-                        $timeout($scope.refresh, 10000);
+                        $timeout($scope.refresh, 60000);
                     });
                 };
                 $scope.fetchData();
