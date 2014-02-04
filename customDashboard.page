@@ -82,6 +82,9 @@
             }
         ]);
     </script>
+    <style>
+    .nvtooltip {display: none;}
+    </style>
     <div ng-app="myApp" ng-controller="myController">
         <table>
             <tr>
