@@ -1,5 +1,4 @@
 <apex:page showheader="false">
-
     <head>
         <title>New Dashboard View Page</title>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
