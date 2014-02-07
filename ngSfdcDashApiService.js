@@ -6,10 +6,11 @@ angular.module('dashApi', [], function($provide) {
         $provide.factory('dashApiService', ['$http', '$timeout', 
             function($http, $timeout){
                 var ret = {};
-                ret.init = function(sessionId, dashboardId, afterDataFetch) {
+                ret.init = function(sessionId, dashboardId, afterDataFetch, instanceUrl) {
                     ret.sessionId = sessionId;
                     ret.dashboardId = dashboardId;
                     ret.afterDataFetch = afterDataFetch;
+                    ret.instanceUrl = instanceUrl || '';
                 };
                 ret.getDashboardUrl = function () {
                     return '/services/data/v30.0/analytics/dashboards/' + ret.dashboardId;
