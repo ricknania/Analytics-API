@@ -1,88 +1,41 @@
 <apex:page showheader="false">
     <head>
-        <title>New Dashboard View Page</title>
+        <title>Live Dashboards</title>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.0.0-beta/nv.d3.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.0.0-beta/nv.d3.min.js"></script>
         <script type="text/javascript" src="//rawgithub.com/arun-sfdc/Analytics-API/master/ngSfdcChart.js"></script>
+        <script type="text/javascript" src="//rawgithub.com/arun-sfdc/Analytics-API/master/ngSfdcDashApiService.js"></script>
     </head>
     <script>
-        angular.module('myApp', ['sfdcCharts']).controller('myController', ['$scope', '$http', '$timeout',
-            function myController($scope, $http, $timeout) {
-                $scope.numColumns = 4;
-                $scope.redraw = function () {
-                    if ($scope.dashResponse !== null) {
-                        $scope.numColumns = parseInt($scope.numColumns, 10);
-                        $scope.columns = new Array($scope.numColumns);
-                        angular.forEach($scope.dashResponse.componentData, function (e, i) {
+        angular.module('myApp', ['sfdcCharts', 'dashApi']).controller('myController', ['dashApiService', '$scope', '$http', '$timeout',
+            function myController(dashApiService, $scope, $http, $timeout) {
+                dashApiService.init('{!$Api.Session_ID}', '01Zx000000061JG', function (response) {
+                    if (response !== null) {
+                        var numColumns = 4;
+                        $scope.columns = new Array(numColumns);
+                        angular.forEach(response.componentData, function (e, i) {
                             if (e.status.dataStatus === "DATA" && e.reportResult !== null) {
-                                if (!$scope.columns[i % $scope.numColumns]) {
-                                    $scope.columns[i % $scope.numColumns] = {
+                                if (!$scope.columns[i % numColumns]) {
+                                    $scope.columns[i % numColumns] = {
                                         components: []
                                     };
                                 }
                                 e.type = ((e.reportResult.reportMetadata.groupingsDown.length > 1) ? 'bar' : 'pie');
-                                e.metadata = $scope.dashResponse.dashboardMetadata.components[i];
-                                $scope.columns[i % $scope.numColumns].components.push(e);
+                                e.metadata = response.dashboardMetadata.components[i];
+                                $scope.columns[i % numColumns].components.push(e);
                             }
                         });
                     }
-                };
-                $scope.dashboardId = '01Zx000000061JG';
-                $scope.getDashboardUrl = function () {
-                    return '/services/data/v30.0/analytics/dashboards/' + $scope.dashboardId;
-                };
-                $scope.poll = function () {
-                    $http({
-                        url: $scope.getDashboardUrl() + '/status',
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer {!$Api.Session_ID}'
-                        }
-                    }).success(function (response) {
-                        var done = true;
-                        angular.forEach(response.componentStatus, function (e, i) {
-                            done = done && (e.refreshStatus === "IDLE");
-                        });
-                        (done === true) ? $scope.fetchData(true) : $timeout($scope.poll, 200);
-                    });
-                };
-                $scope.refresh = function () {
-                    $http({
-                        url: $scope.getDashboardUrl(),
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': 'Bearer {!$Api.Session_ID}'
-                        }
-                    }).success(function (response) {
-                        $timeout($scope.poll, 200);
-                    });
-                };
-                $scope.fetchData = function (ignoreCache) {
-                    $http({
-                        url: $scope.getDashboardUrl(),
-                        method: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer {!$Api.Session_ID}'
-                        },
-                        cache: (true != ignoreCache)
-                    }).success(function (response) {
-                        $scope.dashResponse = response;
-                        $scope.redraw();
-                        if ($scope.afterDataFetch) $scope.afterDataFetch();
-                        $timeout($scope.refresh, 60000);
-                    });
-                };
-                $scope.fetchData();
-                $scope.afterFetchData = function () {
-                    $scope.redraw();
-                };
+                    $timeout(dashApiService.refresh, 10000);
+                });
+                dashApiService.fetchData();
             }
         ]);
     </script>
     <style>
-    .nvtooltip {display: none;}
+        .nvtooltip {display: none;}
     </style>
     <div ng-app="myApp" ng-controller="myController">
         <table>
