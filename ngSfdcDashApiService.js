@@ -13,7 +13,7 @@ angular.module('dashApi', [], function($provide) {
                     ret.instanceUrl = instanceUrl || '';
                 };
                 ret.getDashboardUrl = function () {
-                    return '/services/data/v30.0/analytics/dashboards/' + ret.dashboardId;
+                    return ret.instanceUrl + '/services/data/v30.0/analytics/dashboards/' + ret.dashboardId;
                 };
                 ret.poll = function () {
                     $http({
